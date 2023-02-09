@@ -1,4 +1,4 @@
-name: cookbook-dev
+name: xbatcher-ML-1-cookbook-dev
 channels:
   - conda-forge
 dependencies:
@@ -8,3 +8,10 @@ dependencies:
   - pip
   - pip:
       - sphinx-pythia-theme
+  - numpy
+  - xarray
+  - intake
+  - matplotlib
+  - IPython
+  - tensorflow
+  - xbatcher
