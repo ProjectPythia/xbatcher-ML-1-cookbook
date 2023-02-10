@@ -1,6 +1,8 @@
 format: jb-book
 root: README
 parts:
-  - caption: Introduction
+  - caption: Basic CNNs with xbatcher
     chapters:
-      - file: notebooks/notebook-template
+      - file: notebooks/surface_currents.ipynb
+      - file: notebooks/surface_currents_prep.ipynb
+      - file: notebooks/surface_currents_model.ipynb
