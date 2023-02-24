@@ -17,8 +17,8 @@ By the end of this tutorial, you should be able to use core features of `xbatche
 
 ### Contributors
 
-<a href="https://github.com/ProjectPythia/cookbook-template/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=ProjectPythia/cookbook-template" />
+<a href="https://github.com/cmdupuis3/xbatcher-ML-1-cookbook/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=cmdupuis3/xbatcher-ML-1-cookbook" />
 </a>
 
 ## Structure
