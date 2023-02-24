@@ -1,5 +1,5 @@
 <img src="thumbnail.png" alt="thumbnail" width="300"/>
-
+ 
 # xbatcher for Machine Learning (Part 1) Cookbook
 
 [![nightly-build](https://github.com/ProjectPythia/xbatcher-ML-1-cookbook/actions/workflows/nightly-build.yaml/badge.svg)](https://github.com/ProjectPythia/xbatcher-ML-1-cookbook/actions/workflows/nightly-build.yaml)
