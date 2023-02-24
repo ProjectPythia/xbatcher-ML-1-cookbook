@@ -23,8 +23,6 @@ tags:
     - IPython
     - tensorflow
     - xbatcher
-    - samplepackage
-    - samplepackage
 
 execute:
   # To execute notebooks via a binder instead, replace 'cache' with 'binder'
