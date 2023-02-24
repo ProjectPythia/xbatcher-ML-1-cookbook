@@ -1,18 +1,29 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: Project Pythia Cookbook Template
-author: the <a href="https://projectpythia.org/">Project Pythia</a> Community
+title: xbatcher for Machine Learning Part 1
+author: Christopher Dupuis
 logo: notebooks/images/logos/pythia_logo-white-rtext.svg
 email: projectpythia@ucar.edu
-copyright: "2022"
+copyright: '2022'
 
-description: A sample cookbook description.
+description: A complete workflow for a convolutional neural network using xbatcher.
 thumbnail: thumbnail.png
 tags:
   domains:
-    - sampledomain
+    - oceanography
+    - machine learning
+    - data science
+    - scientific software engineering
   packages:
+    - numpy
+    - xarray
+    - intake
+    - matplotlib
+    - IPython
+    - tensorflow
+    - xbatcher
+    - samplepackage
     - samplepackage
 
 execute:
