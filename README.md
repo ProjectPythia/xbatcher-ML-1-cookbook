@@ -1,19 +1,19 @@
 <img src="thumbnail.png" alt="thumbnail" width="300"/>
 
-# (Replace_with_your_title) Cookbook
+# xbatcher for Machine Learning (Part 1) Cookbook
 
 [![nightly-build](https://github.com/ProjectPythia/xbatcher-ML-1-cookbook/actions/workflows/nightly-build.yaml/badge.svg)](https://github.com/ProjectPythia/xbatcher-ML-1-cookbook/actions/workflows/nightly-build.yaml)
 <!--[![Binder](http://binder.mypythia.org/badge_logo.svg)](http://binder.mypythia.org/v2/gh/ProjectPythia/cookbook-template/main?labpath=notebooks)-->
 
-This Project Pythia Cookbook covers ... (replace `...` with the main subject of your cookbook ... e.g., _working with radar data in Python_)
+This Project Pythia Cookbook covers a complete workflow for a convolutional neural network. Here, we emphasize how to create xarray-based training datasets with the `xbatcher` package.
 
 ## Motivation
 
-(Add a few sentences stating why this cookbook will be useful. What skills will you, "the chef", gain once you have reached the end of the cookbook?)
+By the end of this tutorial, you should be able to use core features of `xbatcher` to create valid training datasets for a convolutional neural network. You should also be able to recombine the CNN results into a valid xarray dataset for further viewing and analysis. Additionally, this tutorial shows some software designs that could be useful for organizing your ML experiments in the future.
 
 ## Authors
 
-[First Author](@first-author), [Second Author](@second-author), etc. _Acknowledge primary content authors here_
+[Christopher Dupuis](@cmdupuis3), [Anirban Sinha](@anirban89), [Ryan Abernathey](@rabernat)
 
 ### Contributors
 
