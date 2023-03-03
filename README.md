@@ -23,21 +23,7 @@ By the end of this tutorial, you should be able to use core features of `xbatche
 
 ## Structure
 
-This Cookbook is mostly broken up by stages of the ML workflow, and is designed such that the training, testing, and prediction phases can be run somewhat separately.
-
-### Section 1 (Introduction)
-
-The introduction includes everything needed to begin the ML workflow here, including imports, an explanation of the problem, and some aspects of software design in light of the specific problem we're looking at.
-
-### Section 2 (Model Setup)
-
-Loads functions and parameters needed for all other sections.
-
-### Section 3 (Training)
-
-### Section 4 (Testing)
-
-### Section 5 (Prediction)
+This Cookbook is mostly broken up by stages of the ML workflow, and is designed such that the training, testing, and prediction phases can be run somewhat separately. While every stage of this workflow is included explicitly, the training, testing, and prediction workflows are also included as separate functions that can be run instead of the inline sections. This enables you to minimize or remove sections you have already run, or already understand.
 
 ## Running the Notebooks
 
