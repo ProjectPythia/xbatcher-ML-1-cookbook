@@ -18,6 +18,7 @@ tags:
   packages:
     - numpy
     - xarray
+    - zarr
     - intake
     - matplotlib
     - IPython
