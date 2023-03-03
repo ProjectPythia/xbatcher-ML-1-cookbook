@@ -23,15 +23,21 @@ By the end of this tutorial, you should be able to use core features of `xbatche
 
 ## Structure
 
-(State one or more sections that will comprise the notebook. E.g., _This cookbook is broken up into two main sections - "Foundations" and "Example Workflows."_ Then, describe each section below.)
+This Cookbook is mostly broken up by stages of the ML workflow, and is designed such that the training, testing, and prediction phases can be run somewhat separately.
 
-### Section 1 ( Replace with the title of this section, e.g. "Foundations" )
+### Section 1 (Introduction)
 
-(Add content for this section, e.g., "The foundational content includes ... ")
+The introduction includes everything needed to begin the ML workflow here, including imports, an explanation of the problem, and some aspects of software design in light of the specific problem we're looking at.
 
-### Section 2 ( Replace with the title of this section, e.g. "Example workflows" )
+### Section 2 (Model Setup)
 
-(Add content for this section, e.g., "Example workflows include ... ")
+Loads functions and parameters needed for all other sections.
+
+### Section 3 (Training)
+
+### Section 4 (Testing)
+
+### Section 5 (Prediction)
 
 ## Running the Notebooks
 
