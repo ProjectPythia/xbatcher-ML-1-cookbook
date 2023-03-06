@@ -30,6 +30,9 @@ execute:
   execute_notebooks: cache
   timeout: 600
   allow_errors: False # cells with expected failures must set the `raises-exception` cell tag
+  exclude_patterns:
+  - 'notebooks/surface_currents_prep.ipynb'
+  - 'notebooks/surface_currents_model.ipynb'
 
 # Add a few extensions to help with parsing content
 parse:
