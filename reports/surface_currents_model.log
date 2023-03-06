@@ -18,7 +18,7 @@ Traceback (most recent call last):
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
 class LossHistory(tf.keras.callbacks.Callback):
-    def __init__(self, frequency=30):
+    def __init__(self, frequency=2048):
         self.frequency = frequency
         self.batch_counter = 0
         
@@ -42,43 +42,43 @@ class LossHistory(tf.keras.callbacks.Callback):
 
         self.i += 1
             
-        if batch % self.frequency == 0:
-            self.logs.append(logs)
-            clear_output(wait=True)
-            print(f"MAE: {self.mae[-1]} \t\t MSE: {self.mse[-1]} \t\t Accuracy: {self.accuracy[-1]}")
+    def on_epoch_end(self, epoch, logs={}):
+        self.logs.append(logs)
+        clear_output(wait=True)
+        print(f"MAE: {self.mae[-1]} \t\t MSE: {self.mse[-1]} \t\t Accuracy: {self.accuracy[-1]}")
+        
+        plt.figure(figsize=(18,5))
 
-            plt.figure(figsize=(18,5))
+        plt.subplot(131)
+        plt.plot(self.x, self.mae, color='#ff6347',label="mae")
+        plt.plot(self.x[-1], self.mae[-1],marker = 'o', markersize=10, color='#ff6347')
+        plt.legend()
+        plt.xlabel(r'batch');
+        plt.ylabel('Mean Absolute Error');
+        plt.ylim([0.,100.])
 
-            plt.subplot(131)
-            plt.plot(self.x, self.mae, color='#ff6347',label="mae")
-            plt.plot(self.x[-1], self.mae[-1],marker = 'o', markersize=10, color='#ff6347')
-            plt.legend()
-            plt.xlabel(r'batch');
-            plt.ylabel('Mean Absolute Error');
-            plt.ylim([0.,100.])
+        plt.subplot(132)
+        plt.plot(self.x, self.mse, color='#6495ed')
+        plt.plot(self.x[-1], self.mse[-1],marker = 'o', markersize=10, color='#6495ed')
+        plt.xlabel('batch')
+        plt.ylabel(r'Mean Squared Error [$cm^2/s^2$]')
+        plt.ylim([0.,1000.])
 
-            plt.subplot(132)
-            plt.plot(self.x, self.mse, color='#6495ed')
-            plt.plot(self.x[-1], self.mse[-1],marker = 'o', markersize=10, color='#6495ed')
-            plt.xlabel('batch')
-            plt.ylabel(r'Mean Squared Error [$cm^2/s^2$]')
-            plt.ylim([0.,1000.])
+        plt.subplot(133)
+        plt.plot(self.x, self.accuracy, color='#3cb371')
+        plt.plot(self.x[-1], self.accuracy[-1],marker = 'o', markersize=10, color='#3cb371')
+        plt.xlabel('batch')
+        plt.ylabel('Model Accuracy')
+        plt.ylim([0.,1.])
 
-            plt.subplot(133)
-            plt.plot(self.x, self.accuracy, color='#3cb371')
-            plt.plot(self.x[-1], self.accuracy[-1],marker = 'o', markersize=10, color='#3cb371')
-            plt.xlabel('batch')
-            plt.ylabel('Model Accuracy')
-            plt.ylim([0.,1.])
-
-            plt.show()
+        plt.show()
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
 Cell [0;32mIn[1], line 1[0m
 [0;32m----> 1[0m [38;5;28;01mclass[39;00m [38;5;21;01mLossHistory[39;00m([43mtf[49m[38;5;241m.[39mkeras[38;5;241m.[39mcallbacks[38;5;241m.[39mCallback):
-[1;32m      2[0m     [38;5;28;01mdef[39;00m [38;5;21m__init__[39m([38;5;28mself[39m, frequency[38;5;241m=[39m[38;5;241m30[39m):
+[1;32m      2[0m     [38;5;28;01mdef[39;00m [38;5;21m__init__[39m([38;5;28mself[39m, frequency[38;5;241m=[39m[38;5;241m2048[39m):
 [1;32m      3[0m         [38;5;28mself[39m[38;5;241m.[39mfrequency [38;5;241m=[39m frequency
 
 [0;31mNameError[0m: name 'tf' is not defined
