@@ -442,7 +442,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2023-03-17 00:44:52.622495: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 AVX512F FMA
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2023-03-17 00:48:55.209980: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 AVX512F FMA
 To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
 </pre></div>
 </div>
@@ -524,7 +524,7 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">prepare_data</span><span class="p">(</span><span class="n">sc5</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
 
-<span class="nn">File /tmp/ipykernel_3764/3337232756.py:3,</span> in <span class="ni">prepare_data</span><span class="nt">(sc, training_time, test_time, predict_time, mask_time)</span>
+<span class="nn">File /tmp/ipykernel_2898/3337232756.py:3,</span> in <span class="ni">prepare_data</span><span class="nt">(sc, training_time, test_time, predict_time, mask_time)</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">def</span> <span class="nf">prepare_data</span><span class="p">(</span><span class="n">sc</span><span class="p">,</span> <span class="n">training_time</span><span class="p">,</span> <span class="n">test_time</span><span class="p">,</span> <span class="n">predict_time</span><span class="p">,</span> <span class="n">mask_time</span><span class="o">=</span><span class="mi">11</span><span class="p">):</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="n">cat</span> <span class="o">=</span> <span class="n">open_catalog</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/pangeo-data/pangeo-datastore/master/intake-catalogs/ocean/CESM_POP.yaml&quot;</span><span class="p">)</span>
 <span class="ne">----&gt; </span><span class="mi">3</span>     <span class="n">ds</span>  <span class="o">=</span> <span class="n">cat</span><span class="p">[</span><span class="s2">&quot;CESM_POP_hires_control&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_dask</span><span class="p">()</span>

@@ -25,7 +25,7 @@ prepare_data(sc5, 200, 1000, 1000, 200)
 Cell [0;32mIn[9], line 1[0m
 [0;32m----> 1[0m [43mprepare_data[49m[43m([49m[43msc5[49m[43m,[49m[43m [49m[38;5;241;43m200[39;49m[43m,[49m[43m [49m[38;5;241;43m1000[39;49m[43m,[49m[43m [49m[38;5;241;43m1000[39;49m[43m,[49m[43m [49m[38;5;241;43m200[39;49m[43m)[49m
 
-File [0;32m/tmp/ipykernel_3764/3337232756.py:3[0m, in [0;36mprepare_data[0;34m(sc, training_time, test_time, predict_time, mask_time)[0m
+File [0;32m/tmp/ipykernel_2898/3337232756.py:3[0m, in [0;36mprepare_data[0;34m(sc, training_time, test_time, predict_time, mask_time)[0m
 [1;32m      1[0m [38;5;28;01mdef[39;00m [38;5;21mprepare_data[39m(sc, training_time, test_time, predict_time, mask_time[38;5;241m=[39m[38;5;241m11[39m):
 [1;32m      2[0m     cat [38;5;241m=[39m open_catalog([38;5;124m"[39m[38;5;124mhttps://raw.githubusercontent.com/pangeo-data/pangeo-datastore/master/intake-catalogs/ocean/CESM_POP.yaml[39m[38;5;124m"[39m)
 [0;32m----> 3[0m     ds  [38;5;241m=[39m [43mcat[49m[43m[[49m[38;5;124;43m"[39;49m[38;5;124;43mCESM_POP_hires_control[39;49m[38;5;124;43m"[39;49m[43m][49m[38;5;241;43m.[39;49m[43mto_dask[49m[43m([49m[43m)[49m
