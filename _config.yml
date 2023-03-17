@@ -27,12 +27,10 @@ tags:
 
 execute:
   # To execute notebooks via a binder instead, replace 'cache' with 'binder'
-  execute_notebooks: 'binder'
-  timeout: 600
-  allow_errors: False # cells with expected failures must set the `raises-exception` cell tag
+  execute_notebooks: force
   exclude_patterns:
-  - 'notebooks/surface_currents_prep.ipynb'
-  - 'notebooks/surface_currents_model.ipynb'
+    - 'notebooks/surface_currents_prep.ipynb'
+    - 'notebooks/surface_currents_model.ipynb'
 
 # Add a few extensions to help with parsing content
 parse:
