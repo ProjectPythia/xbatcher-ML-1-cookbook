@@ -4,33 +4,14 @@
 title: xbatcher for Machine Learning Part 1
 author: Christopher Dupuis
 logo: notebooks/images/logos/pythia_logo-white-rtext.svg
-email: projectpythia@ucar.edu
-copyright: '2022'
-
-description: A complete workflow for a convolutional neural network using xbatcher.
-thumbnail: thumbnail.png
-tags:
-  domains:
-    - oceanography
-    - machine learning
-    - data science
-    - scientific software engineering
-  packages:
-    - numpy
-    - xarray
-    - zarr
-    - intake
-    - matplotlib
-    - IPython
-    - tensorflow
-    - xbatcher
+copyright: "2022"
 
 execute:
   # To execute notebooks via a binder instead, replace 'cache' with 'binder'
   execute_notebooks: force
   exclude_patterns:
-    - 'notebooks/surface_currents_prep.ipynb'
-    - 'notebooks/surface_currents_model.ipynb'
+    - "notebooks/surface_currents_prep.ipynb"
+    - "notebooks/surface_currents_model.ipynb"
 
 # Add a few extensions to help with parsing content
 parse:
@@ -47,9 +28,8 @@ parse:
 
 sphinx:
   config:
-
     html_favicon: notebooks/images/icons/favicon.ico
-    html_last_updated_fmt: '%-d %B %Y'
+    html_last_updated_fmt: "%-d %B %Y"
     html_theme: sphinx_pythia_theme
     html_permalinks_icon: '<i class="fas fa-link"></i>'
     html_theme_options:

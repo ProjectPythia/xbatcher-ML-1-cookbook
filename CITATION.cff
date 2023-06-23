@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this cookbook, please cite it as below."
+authors:
+  # add additional entries for each author -- see https://github.com/citation-file-format/citation-file-format/blob/main/schema-guide.md
+  - family-names: Dupuis
+    given-names: Christopher
+    website: https://github.com/cmdupuis3
+  - family-names: Sinha
+    given-names: Anirban
+    website: https://github.com/anirban89
+  - family-names: Abernathey
+    given-names: Ryan
+    website: https://github.com/rabernat
+    orcid: https://orcid.org/0000-0001-5999-4917
+  - name: "xbatcher for Machine Learning Part 1 Cookbook contributors" # use the 'name' field to acknowledge organizations
+    website: "https://github.com/ProjectPythia/xbatcher-ML-1-cookbook/graphs/contributors"
+title: "xbatcher for Machine Learning Part 1 Cookbook"
+abstract: "A complete workflow for a convolutional neural network using xbatcher."
