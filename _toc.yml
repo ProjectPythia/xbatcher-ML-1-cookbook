@@ -1,6 +1,9 @@
 format: jb-book
 root: README
 parts:
+  - caption: Preamble
+    chapters:
+      - file: notebooks/how-to-cite
   - caption: Basic CNNs with xbatcher
     chapters:
       - file: notebooks/surface_currents.ipynb
