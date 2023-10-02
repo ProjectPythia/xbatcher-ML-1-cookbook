@@ -1,0 +1,16 @@
+thumbnail: thumbnail.png
+tags:
+  domains:
+    - oceanography
+    - machine learning
+    - data science
+    - scientific software engineering
+  packages:
+    - numpy
+    - xarray
+    - zarr
+    - intake
+    - matplotlib
+    - IPython
+    - tensorflow
+    - xbatcher
