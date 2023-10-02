@@ -3,7 +3,7 @@
 # xbatcher for Machine Learning (Part 1) Cookbook
 
 [![nightly-build](https://github.com/ProjectPythia/xbatcher-ML-1-cookbook/actions/workflows/nightly-build.yaml/badge.svg)](https://github.com/ProjectPythia/xbatcher-ML-1-cookbook/actions/workflows/nightly-build.yaml)
-[![Binder](http://binder.mypythia.org/badge_logo.svg)](http://binder.mypythia.org/v2/gh/ProjectPythia/xbatcher-ML-1-cookbook/main?labpath=notebooks)
+[![Binder](https://binder.projectpythia.org//badge_logo.svg)](https://binder.projectpythia.org/v2/gh/ProjectPythia/xbatcher-ML-1-cookbook/main?labpath=notebooks)
 [![DOI](https://zenodo.org/badge/597998597.svg)](https://zenodo.org/badge/latestdoi/597998597)
 
 This Project Pythia Cookbook covers a complete workflow for a convolutional neural network. Here, we emphasize how to create xarray-based training datasets with the `xbatcher` package.
