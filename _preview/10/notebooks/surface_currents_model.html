@@ -1,0 +1,679 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Model and Related Functions &#8212; xbatcher for Machine Learning Part 1</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-pythia-theme.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Data and Preprocessing" href="surface_currents_prep.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-T52X8HNYE8"></script>
+<script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', 'G-T52X8HNYE8');
+                </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="132">
+    <div class="container-fluid" id="shim"></div>
+    <div class="container-fluid" id="banner"></div>
+    <nav class="navbar navbar-dark navbar-expand-lg bg-dark fixed-top bd-navbar shadow" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="https://projectpythia.org">
+  <img src="../_static/pythia_logo-white-rtext.svg" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class=" collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://projectpythia.org">Home</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://foundations.projectpythia.org">Foundations</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://cookbooks.projectpythia.org">Cookbooks</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://projectpythia.org/resource-gallery.html">Resources</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://projectpythia.org/index.html#join-us">Community</a>
+  </li>
+  
+  
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/ProjectPythia" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://twitter.com/project_pythia" rel="noopener" target="_blank" title="Twitter">
+            <span><i class="fab fa-twitter-square"></i></span>
+            <label class="sr-only">Twitter</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://www.youtube.com/channel/UCoZPBqJal5uKpO8ZiwzavCw" rel="noopener" target="_blank" title="YouTube">
+            <span><i class="fab fa-youtube-square"></i></span>
+            <label class="sr-only">YouTube</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    <div class="container-xl">
+      <div class="row">
+        
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   xbatcher for Machine Learning (Part 1) Cookbook
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Preamble
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="how-to-cite.html">
+   How to Cite This Cookbook
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Basic CNNs with xbatcher
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="surface_currents.html">
+   xbatcher for Machine Learning Part 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="surface_currents_prep.html">
+   Data and Preprocessing
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Model and Related Functions
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by <a href="https://projectpythia.org">Project Pythia</a>.<br><br>
+All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code content is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons BY 4.0 (CC BY 4.0)</a>.<br><br>
+
+</div>
+
+</div>
+
+        
+
+        <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main"><div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/surface_currents_model.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/ProjectPythia/xbatcher-ML-1-cookbook/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/ProjectPythia/xbatcher-ML-1-cookbook//issues/new?title=Issue%20on%20page%20%2Fnotebooks/surface_currents_model.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/ProjectPythia/xbatcher-ML-1-cookbook/edit/main/notebooks/surface_currents_model.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://binder.projectpythia.org//v2/gh/ProjectPythia/xbatcher-ML-1-cookbook/main?urlpath=lab/tree/notebooks/surface_currents_model.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+        </div>
+    </div>
+</div>
+          <div id="main-content" class="row">
+            <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+              
+              <div>
+                
+  <div class="section" id="model-and-related-functions">
+<h1>Model and Related Functions<a class="headerlink" href="#model-and-related-functions" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
+<p>First up is a callback for tracking loss history. This is helpful because we can use it to view how training is progressing. The specifics aren’t too important, but it can be altered to trigger at different frequencies and on different events (like an epoch end vs. a batch end).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">LossHistory</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">Callback</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frequency</span> <span class="o">=</span> <span class="n">frequency</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch_counter</span> <span class="o">=</span> <span class="mi">0</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mae</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mse</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">accuracy</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logs</span> <span class="o">=</span> <span class="p">[]</span>
+        
+    <span class="k">def</span> <span class="nf">on_train_begin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">logs</span><span class="o">=</span><span class="p">{}):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        
+    <span class="k">def</span> <span class="nf">on_batch_end</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">logs</span><span class="o">=</span><span class="p">{}):</span>
+        <span class="c1"># if batch % self.frequency == 0:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch_counter</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">frequency</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">i</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mae</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">logs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mae&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mse</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">logs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mse&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">accuracy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">logs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;accuracy&#39;</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            
+        <span class="k">if</span> <span class="n">batch</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">frequency</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">logs</span><span class="p">)</span>
+            <span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MAE: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">mae</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="se">\t\t</span><span class="s2"> MSE: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">mse</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="se">\t\t</span><span class="s2"> Accuracy: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">accuracy</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+            <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">131</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mae</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#ff6347&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;mae&quot;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">mae</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#ff6347&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;batch&#39;</span><span class="p">);</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Mean Absolute Error&#39;</span><span class="p">);</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span><span class="mf">100.</span><span class="p">])</span>
+
+            <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">132</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mse</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#6495ed&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">mse</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#6495ed&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;batch&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Mean Squared Error [$cm^2/s^2$]&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span><span class="mf">1000.</span><span class="p">])</span>
+
+            <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">133</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">accuracy</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#3cb371&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">accuracy</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#3cb371&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;batch&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Model Accuracy&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span><span class="mf">1.</span><span class="p">])</span>
+
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We define a custom loss function to take the MAE of multidimensional objects. (This should be able to filter NaNs, thereby solving the coastline problem, but this doesn’t work!). Not sure if this gives different answers from a standard MAE in the case that no NaNs are present. When NaNs are present, this should give different results from using <code class="docutils literal notranslate"><span class="pre">.fillna(0)</span></code> on the training data, because it won’t entrain zeros when the model takes a convolution. But does it actually work? ¯\_(ツ)_/¯</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Corner case: what happens when everything is NaN?</span>
+<span class="k">class</span> <span class="nc">Grid_MAE</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">Loss</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+        <span class="n">avg</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y_true</span> <span class="o">-</span> <span class="n">y_pred</span><span class="p">)</span>
+        <span class="n">masked</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">is_finite</span><span class="p">(</span><span class="n">avg</span><span class="p">),</span> <span class="n">avg</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">avg</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">masked</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">get_model</span></code> function generates a neural network based on Sinha and Abernathey (2021), but offers some parameters to enable a broader class of neural networks of similar form.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_model</span><span class="p">(</span><span class="n">halo_size</span><span class="p">,</span> <span class="n">ds</span><span class="p">,</span> <span class="n">sc</span><span class="p">,</span> <span class="n">conv_dims</span><span class="p">,</span> <span class="n">nfilters</span><span class="p">,</span> <span class="n">conv_kernels</span><span class="p">,</span> <span class="n">dense_layers</span><span class="p">):</span>
+
+    <span class="n">conv_init</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">conv_dims</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sc</span><span class="o">.</span><span class="n">conv_var</span><span class="p">),))</span>
+    <span class="n">last_layer</span> <span class="o">=</span> <span class="n">conv_init</span>
+    <span class="k">for</span> <span class="n">kernel</span> <span class="ow">in</span> <span class="n">conv_kernels</span><span class="p">:</span>
+        <span class="n">this_layer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Conv2D</span><span class="p">(</span><span class="n">nfilters</span><span class="p">,</span> <span class="n">kernel</span><span class="p">)(</span><span class="n">last_layer</span><span class="p">)</span>
+        <span class="n">last_layer</span> <span class="o">=</span> <span class="n">this_layer</span>
+        <span class="n">nfilters</span> <span class="o">=</span> <span class="n">nfilters</span> <span class="o">/</span> <span class="mf">2.</span>
+    
+    <span class="n">halo_dims</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">halo_size</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">conv_dims</span><span class="p">]</span>
+    <span class="n">input_init</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">halo_dims</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sc</span><span class="o">.</span><span class="n">input_var</span><span class="p">),))</span>
+    <span class="n">last_layer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">last_layer</span><span class="p">,</span> <span class="n">input_init</span><span class="p">])</span>
+    <span class="n">last_layer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)(</span><span class="n">last_layer</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dense_layers</span><span class="p">):</span>
+        <span class="n">this_layer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">nfilters</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">last_layer</span><span class="p">)</span>
+        <span class="n">last_layer</span> <span class="o">=</span> <span class="n">this_layer</span>
+        <span class="n">nfilters</span> <span class="o">=</span> <span class="n">nfilters</span> <span class="o">/</span> <span class="mf">2.</span>
+        
+    <span class="n">output_layer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sc</span><span class="o">.</span><span class="n">target</span><span class="p">))(</span><span class="n">last_layer</span><span class="p">)</span>
+    
+    <span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="n">conv_init</span><span class="p">,</span> <span class="n">input_init</span><span class="p">],</span> <span class="n">outputs</span><span class="o">=</span><span class="n">output_layer</span><span class="p">)</span>
+    <span class="n">opt</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="n">Grid_MAE</span><span class="p">(),</span> <span class="n">optimizer</span><span class="o">=</span><span class="n">opt</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;mae&#39;</span><span class="p">,</span> <span class="s1">&#39;mse&#39;</span><span class="p">,</span> <span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="n">model</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">sc</span><span class="p">,</span> <span class="n">conv_dims</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">nfilters</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">conv_kernels</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">dense_layers</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">pars</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span>
+
+    <span class="n">halo_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">conv_kernels</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">conv_kernels</span><span class="p">))</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+    
+    <span class="n">nlons</span><span class="p">,</span> <span class="n">nlats</span> <span class="o">=</span> <span class="n">conv_dims</span>
+
+    <span class="c1"># bgen = xb.BatchGenerator(</span>
+    <span class="c1">#     ds,</span>
+    <span class="c1">#     {&#39;nlon&#39;:nlons,       &#39;nlat&#39;:nlats},</span>
+    <span class="c1">#     {&#39;nlon&#39;:2*halo_size, &#39;nlat&#39;:2*halo_size},</span>
+    <span class="c1">#     concat_input_dims=True</span>
+    <span class="c1"># )</span>
+    
+    <span class="n">latlen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s1">&#39;nlat&#39;</span><span class="p">])</span>
+    <span class="n">lonlen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s1">&#39;nlon&#39;</span><span class="p">])</span>
+    <span class="n">nlon_range</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">nlons</span><span class="p">,</span><span class="n">lonlen</span><span class="p">,</span><span class="n">nlons</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">halo_size</span><span class="p">)</span>
+    <span class="n">nlat_range</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">nlats</span><span class="p">,</span><span class="n">latlen</span><span class="p">,</span><span class="n">nlats</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">halo_size</span><span class="p">)</span>
+
+    <span class="n">batch</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">ds</span>
+        <span class="o">.</span><span class="n">rolling</span><span class="p">({</span><span class="s2">&quot;nlat&quot;</span><span class="p">:</span> <span class="n">nlats</span><span class="p">,</span> <span class="s2">&quot;nlon&quot;</span><span class="p">:</span> <span class="n">nlons</span><span class="p">})</span>
+        <span class="o">.</span><span class="n">construct</span><span class="p">({</span><span class="s2">&quot;nlat&quot;</span><span class="p">:</span> <span class="s2">&quot;nlat_input&quot;</span><span class="p">,</span> <span class="s2">&quot;nlon&quot;</span><span class="p">:</span> <span class="s2">&quot;nlon_input&quot;</span><span class="p">})[{</span><span class="s1">&#39;nlat&#39;</span><span class="p">:</span><span class="n">nlat_range</span><span class="p">,</span> <span class="s1">&#39;nlon&#39;</span><span class="p">:</span><span class="n">nlon_range</span><span class="p">}]</span>
+        <span class="o">.</span><span class="n">stack</span><span class="p">({</span><span class="s2">&quot;input_batch&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;nlat&quot;</span><span class="p">,</span> <span class="s2">&quot;nlon&quot;</span><span class="p">)},</span> <span class="n">create_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">rename_dims</span><span class="p">({</span><span class="s1">&#39;nlat_input&#39;</span><span class="p">:</span><span class="s1">&#39;nlat&#39;</span><span class="p">,</span> <span class="s1">&#39;nlon_input&#39;</span><span class="p">:</span><span class="s1">&#39;nlon&#39;</span><span class="p">})</span>
+        <span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="s1">&#39;input_batch&#39;</span><span class="p">,</span><span class="o">...</span><span class="p">)</span>
+        <span class="c1"># .chunk({&#39;input_batch&#39;:32, &#39;nlat&#39;:nlats, &#39;nlon&#39;:nlons})</span>
+        <span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="s1">&#39;input_batch&#39;</span><span class="p">)</span>
+    <span class="p">)</span>
+    
+    <span class="n">rnds</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">batch</span><span class="p">[</span><span class="s1">&#39;input_batch&#39;</span><span class="p">])))</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">rnds</span><span class="p">)</span>
+    <span class="n">batch</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[{</span><span class="s1">&#39;input_batch&#39;</span><span class="p">:(</span><span class="n">rnds</span><span class="p">)}]</span>
+    
+    <span class="k">def</span> <span class="nf">batch_generator</span><span class="p">(</span><span class="n">batch_set</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">batch_set</span><span class="p">[</span><span class="s1">&#39;input_batch&#39;</span><span class="p">])</span> <span class="o">-</span> <span class="n">batch_size</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">batch_set</span><span class="o">.</span><span class="n">isel</span><span class="p">({</span><span class="s1">&#39;input_batch&#39;</span><span class="p">:</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">,(</span><span class="n">n</span><span class="o">+</span><span class="n">batch_size</span><span class="p">))})</span>
+            <span class="n">n</span> <span class="o">+=</span> <span class="n">batch_size</span>
+    
+    <span class="c1"># We need this subsetting stencil to compensate for the fact that a halo is</span>
+    <span class="c1"># removed by each convolution layer. This means that the input_var variables</span>
+    <span class="c1"># will be the wrong size at the concat layer unless we strip a halo from them</span>
+    <span class="n">sub</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;nlon_input&#39;</span><span class="p">:</span><span class="nb">range</span><span class="p">(</span><span class="n">halo_size</span><span class="p">,</span><span class="n">nlons</span><span class="o">-</span><span class="n">halo_size</span><span class="p">),</span>
+           <span class="s1">&#39;nlat_input&#39;</span><span class="p">:</span><span class="nb">range</span><span class="p">(</span><span class="n">halo_size</span><span class="p">,</span><span class="n">nlats</span><span class="o">-</span><span class="n">halo_size</span><span class="p">)}</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="n">halo_size</span><span class="p">,</span> <span class="o">**</span><span class="n">pars</span><span class="p">)</span>
+    <span class="n">history</span> <span class="o">=</span> <span class="n">LossHistory</span><span class="p">()</span>
+    
+    <span class="n">bgen</span> <span class="o">=</span> <span class="n">batch_generator</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="mi">4096</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">bgen</span><span class="p">:</span>
+        
+        <span class="n">batch_conv</span>   <span class="o">=</span> <span class="p">[</span><span class="n">batch</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sc</span><span class="o">.</span><span class="n">conv_var</span><span class="p">]</span>
+        <span class="n">batch_input</span>  <span class="o">=</span> <span class="p">[</span><span class="n">batch</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">sub</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sc</span><span class="o">.</span><span class="n">input_var</span><span class="p">]</span>
+        <span class="n">batch_target</span> <span class="o">=</span> <span class="p">[</span><span class="n">batch</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">sub</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sc</span><span class="o">.</span><span class="n">target</span><span class="p">]</span>
+        <span class="n">batch_conv</span>   <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">batch_conv</span><span class="p">)</span><span class="o">.</span><span class="n">to_array</span><span class="p">(</span><span class="s1">&#39;var&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="o">...</span><span class="p">,</span><span class="s1">&#39;var&#39;</span><span class="p">)</span>
+        <span class="n">batch_input</span>  <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">batch_input</span><span class="p">)</span><span class="o">.</span><span class="n">to_array</span><span class="p">(</span><span class="s1">&#39;var&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="o">...</span><span class="p">,</span><span class="s1">&#39;var&#39;</span><span class="p">)</span>
+        <span class="n">batch_target</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">batch_target</span><span class="p">)</span><span class="o">.</span><span class="n">to_array</span><span class="p">(</span><span class="s1">&#39;var&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="o">...</span><span class="p">,</span><span class="s1">&#39;var&#39;</span><span class="p">)</span>
+        
+        <span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="n">batch_conv</span><span class="p">,</span> <span class="n">batch_input</span><span class="p">],</span>
+                  <span class="n">batch_target</span><span class="p">,</span>
+                  <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="c1">#epochs=4,</span>
+                  <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">history</span><span class="p">])</span>
+
+    <span class="n">model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;models/&#39;</span><span class="o">+</span> <span class="n">sc</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">savez</span><span class="p">(</span><span class="s1">&#39;models/history_&#39;</span><span class="o">+</span><span class="n">sc</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">losses</span><span class="o">=</span><span class="n">history</span><span class="o">.</span><span class="n">mae</span><span class="p">,</span> <span class="n">mse</span><span class="o">=</span><span class="n">history</span><span class="o">.</span><span class="n">mse</span><span class="p">,</span> <span class="n">accuracy</span><span class="o">=</span><span class="n">history</span><span class="o">.</span><span class="n">accuracy</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">model</span><span class="p">,</span> <span class="n">history</span>
+    
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">sc</span><span class="p">,</span> <span class="n">conv_dims</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">conv_kernels</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">]):</span>
+    
+    <span class="n">halo_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">conv_kernels</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">conv_kernels</span><span class="p">))</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">nlons</span><span class="p">,</span> <span class="n">nlats</span> <span class="o">=</span> <span class="n">conv_dims</span>
+    
+    <span class="n">latlen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s1">&#39;nlat&#39;</span><span class="p">])</span>
+    <span class="n">lonlen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s1">&#39;nlon&#39;</span><span class="p">])</span>
+    <span class="n">nlon_range</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">nlons</span><span class="p">,</span><span class="n">lonlen</span><span class="p">,</span><span class="n">nlons</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">halo_size</span><span class="p">)</span>
+    <span class="n">nlat_range</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">nlats</span><span class="p">,</span><span class="n">latlen</span><span class="p">,</span><span class="n">nlats</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">halo_size</span><span class="p">)</span>
+
+    <span class="n">batch</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">ds</span>
+        <span class="o">.</span><span class="n">rolling</span><span class="p">({</span><span class="s2">&quot;nlat&quot;</span><span class="p">:</span> <span class="n">nlats</span><span class="p">,</span> <span class="s2">&quot;nlon&quot;</span><span class="p">:</span> <span class="n">nlons</span><span class="p">})</span>
+        <span class="o">.</span><span class="n">construct</span><span class="p">({</span><span class="s2">&quot;nlat&quot;</span><span class="p">:</span> <span class="s2">&quot;nlat_input&quot;</span><span class="p">,</span> <span class="s2">&quot;nlon&quot;</span><span class="p">:</span> <span class="s2">&quot;nlon_input&quot;</span><span class="p">})[{</span><span class="s1">&#39;nlat&#39;</span><span class="p">:</span><span class="n">nlat_range</span><span class="p">,</span> <span class="s1">&#39;nlon&#39;</span><span class="p">:</span><span class="n">nlon_range</span><span class="p">}]</span>
+        <span class="o">.</span><span class="n">stack</span><span class="p">({</span><span class="s2">&quot;input_batch&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;nlat&quot;</span><span class="p">,</span> <span class="s2">&quot;nlon&quot;</span><span class="p">)},</span> <span class="n">create_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">rename_dims</span><span class="p">({</span><span class="s1">&#39;nlat_input&#39;</span><span class="p">:</span><span class="s1">&#39;nlat&#39;</span><span class="p">,</span> <span class="s1">&#39;nlon_input&#39;</span><span class="p">:</span><span class="s1">&#39;nlon&#39;</span><span class="p">})</span>
+        <span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="s1">&#39;input_batch&#39;</span><span class="p">,</span><span class="o">...</span><span class="p">)</span>
+        <span class="c1"># .chunk({&#39;input_batch&#39;:32, &#39;nlat&#39;:nlats, &#39;nlon&#39;:nlons})</span>
+        <span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="s1">&#39;input_batch&#39;</span><span class="p">)</span>
+    <span class="p">)</span>
+    
+    <span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s1">&#39;models/&#39;</span><span class="o">+</span> <span class="n">sc</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">custom_objects</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Grid_MAE&#39;</span><span class="p">:</span><span class="n">Grid_MAE</span><span class="p">})</span>
+    
+    <span class="n">batch_conv</span>   <span class="o">=</span> <span class="p">[</span><span class="n">batch</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>      <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sc</span><span class="o">.</span><span class="n">conv_var</span><span class="p">]</span>
+    <span class="n">batch_input</span>  <span class="o">=</span> <span class="p">[</span><span class="n">batch</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">sub</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sc</span><span class="o">.</span><span class="n">input_var</span><span class="p">]</span>
+    <span class="n">batch_target</span> <span class="o">=</span> <span class="p">[</span><span class="n">batch</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">sub</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sc</span><span class="o">.</span><span class="n">target</span><span class="p">]</span>
+    <span class="n">batch_conv</span>   <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">batch_conv</span>  <span class="p">)</span><span class="o">.</span><span class="n">to_array</span><span class="p">(</span><span class="s1">&#39;var&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="o">...</span><span class="p">,</span><span class="s1">&#39;var&#39;</span><span class="p">)</span>
+    <span class="n">batch_input</span>  <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">batch_input</span> <span class="p">)</span><span class="o">.</span><span class="n">to_array</span><span class="p">(</span><span class="s1">&#39;var&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="o">...</span><span class="p">,</span><span class="s1">&#39;var&#39;</span><span class="p">)</span>
+    <span class="n">batch_target</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">batch_target</span><span class="p">)</span><span class="o">.</span><span class="n">to_array</span><span class="p">(</span><span class="s1">&#39;var&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="o">...</span><span class="p">,</span><span class="s1">&#39;var&#39;</span><span class="p">)</span>
+    
+    <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">([</span><span class="n">batch_conv</span><span class="p">,</span> <span class="n">batch_input</span><span class="p">],</span> <span class="n">batch_target</span><span class="p">)</span>
+    
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">sc</span><span class="p">,</span> <span class="n">conv_dims</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">conv_kernels</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">]):</span>
+    
+    <span class="n">halo_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">conv_kernels</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">conv_kernels</span><span class="p">))</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">nlons</span><span class="p">,</span> <span class="n">nlats</span> <span class="o">=</span> <span class="n">conv_dims</span>
+    
+    <span class="n">latlen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s1">&#39;nlat&#39;</span><span class="p">])</span>
+    <span class="n">lonlen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s1">&#39;nlon&#39;</span><span class="p">])</span>
+    <span class="n">nlon_range</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">nlons</span><span class="p">,</span><span class="n">lonlen</span><span class="p">,</span><span class="n">nlons</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">halo_size</span><span class="p">)</span>
+    <span class="n">nlat_range</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">nlats</span><span class="p">,</span><span class="n">latlen</span><span class="p">,</span><span class="n">nlats</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">halo_size</span><span class="p">)</span>
+
+    <span class="n">batch</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">ds</span>
+        <span class="o">.</span><span class="n">rolling</span><span class="p">({</span><span class="s2">&quot;nlat&quot;</span><span class="p">:</span> <span class="n">nlats</span><span class="p">,</span> <span class="s2">&quot;nlon&quot;</span><span class="p">:</span> <span class="n">nlons</span><span class="p">})</span>
+        <span class="o">.</span><span class="n">construct</span><span class="p">({</span><span class="s2">&quot;nlat&quot;</span><span class="p">:</span> <span class="s2">&quot;nlat_input&quot;</span><span class="p">,</span> <span class="s2">&quot;nlon&quot;</span><span class="p">:</span> <span class="s2">&quot;nlon_input&quot;</span><span class="p">})[{</span><span class="s1">&#39;nlat&#39;</span><span class="p">:</span><span class="n">nlat_range</span><span class="p">,</span> <span class="s1">&#39;nlon&#39;</span><span class="p">:</span><span class="n">nlon_range</span><span class="p">}]</span>
+        <span class="o">.</span><span class="n">stack</span><span class="p">({</span><span class="s2">&quot;input_batch&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;nlat&quot;</span><span class="p">,</span> <span class="s2">&quot;nlon&quot;</span><span class="p">)},</span> <span class="n">create_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">rename_dims</span><span class="p">({</span><span class="s1">&#39;nlat_input&#39;</span><span class="p">:</span><span class="s1">&#39;nlat&#39;</span><span class="p">,</span> <span class="s1">&#39;nlon_input&#39;</span><span class="p">:</span><span class="s1">&#39;nlon&#39;</span><span class="p">})</span>
+        <span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="s1">&#39;input_batch&#39;</span><span class="p">,</span><span class="o">...</span><span class="p">)</span>
+        <span class="c1"># .chunk({&#39;input_batch&#39;:32, &#39;nlat&#39;:nlats, &#39;nlon&#39;:nlons})</span>
+        <span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="s1">&#39;input_batch&#39;</span><span class="p">)</span>
+    <span class="p">)</span>
+    
+    <span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s1">&#39;models/&#39;</span><span class="o">+</span> <span class="n">sc</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">custom_objects</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Grid_MAE&#39;</span><span class="p">:</span><span class="n">Grid_MAE</span><span class="p">})</span>
+    
+    <span class="n">batch_conv</span>   <span class="o">=</span> <span class="p">[</span><span class="n">batch</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>      <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sc</span><span class="o">.</span><span class="n">conv_var</span><span class="p">]</span>
+    <span class="n">batch_input</span>  <span class="o">=</span> <span class="p">[</span><span class="n">batch</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">sub</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sc</span><span class="o">.</span><span class="n">input_var</span><span class="p">]</span>
+    <span class="n">batch_conv</span>   <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">batch_conv</span>  <span class="p">)</span><span class="o">.</span><span class="n">to_array</span><span class="p">(</span><span class="s1">&#39;var&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="o">...</span><span class="p">,</span><span class="s1">&#39;var&#39;</span><span class="p">)</span>
+    <span class="n">batch_input</span>  <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">batch_input</span> <span class="p">)</span><span class="o">.</span><span class="n">to_array</span><span class="p">(</span><span class="s1">&#39;var&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="o">...</span><span class="p">,</span><span class="s1">&#39;var&#39;</span><span class="p">)</span>
+    
+    <span class="n">target</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="n">batch_conv</span><span class="p">,</span> <span class="n">batch_input</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">target</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="surface_currents_prep.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Data and Preprocessing</p>
+        </div>
+    </a>
+</div>
+            </div>
+          </div>
+        </main>
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+<footer class="footer">
+  <div class="container-fluid m-0 p-0">
+  
+    <div class="footer-item">
+    
+  <div class="container-fluid footer-logos">
+    <div class="container-xl">
+      <div class="row d-flex flex-wrap align-items-center">
+        <div class="d-flex col-lg-3 col-md-4 col-sm-6 p-2 mx-auto">
+          <img alt="NCAR" src="../_images/NCAR-contemp-logo-blue.svg" style="width: 100%">
+        </div>
+        <div class="d-flex col-lg-3 col-md-4 col-sm-6 p-2 mx-auto">
+          <img alt="Unidata" src="../_images/Unidata_logo_horizontal_1200x300.svg" style="width: 100%">
+        </div>
+        <div class="d-flex col-lg-3 col-md-4 col-sm-6 p-2 mx-auto">
+          <img alt="UAlbany" src="../_images/UAlbany-A2-logo-purple-gold.svg" style="width: 100%">
+        </div>
+      </div>
+    </div>
+  </div>
+    </div>
+  
+    <div class="footer-item">
+    
+    </div>
+  
+    <div class="footer-item">
+      <div class="container-fluid footer-info">
+    <div class="container-xl">
+      <div class="d-flex justify-content-center">
+        <p class="py-1 m-0">
+            &copy;&nbsp;2022.
+        
+          By Christopher Dupuis.
+        
+          Last updated on 2 October 2023.
+        </p>
+      </div>
+    </div>
+  </div>
+    </div>
+  
+    <div class="footer-item">
+    
+    </div>
+  
+  </div>
+</footer>
+  </body>
+</html>
