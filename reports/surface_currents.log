@@ -1,60 +1,75 @@
 Traceback (most recent call last):
-  File "/usr/share/miniconda3/envs/xbatcher-ML-1-cookbook-dev/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+  File "/home/runner/miniconda3/envs/xbatcher-ML-1-cookbook-dev/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
     executenb(
-  File "/usr/share/miniconda3/envs/xbatcher-ML-1-cookbook-dev/lib/python3.10/site-packages/nbclient/client.py", line 1204, in execute
+  File "/home/runner/miniconda3/envs/xbatcher-ML-1-cookbook-dev/lib/python3.10/site-packages/nbclient/client.py", line 1204, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-  File "/usr/share/miniconda3/envs/xbatcher-ML-1-cookbook-dev/lib/python3.10/site-packages/nbclient/util.py", line 84, in wrapped
+  File "/home/runner/miniconda3/envs/xbatcher-ML-1-cookbook-dev/lib/python3.10/site-packages/nbclient/util.py", line 84, in wrapped
     return just_run(coro(*args, **kwargs))
-  File "/usr/share/miniconda3/envs/xbatcher-ML-1-cookbook-dev/lib/python3.10/site-packages/nbclient/util.py", line 62, in just_run
+  File "/home/runner/miniconda3/envs/xbatcher-ML-1-cookbook-dev/lib/python3.10/site-packages/nbclient/util.py", line 62, in just_run
     return loop.run_until_complete(coro)
-  File "/usr/share/miniconda3/envs/xbatcher-ML-1-cookbook-dev/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+  File "/home/runner/miniconda3/envs/xbatcher-ML-1-cookbook-dev/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
     return future.result()
-  File "/usr/share/miniconda3/envs/xbatcher-ML-1-cookbook-dev/lib/python3.10/site-packages/nbclient/client.py", line 663, in async_execute
+  File "/home/runner/miniconda3/envs/xbatcher-ML-1-cookbook-dev/lib/python3.10/site-packages/nbclient/client.py", line 663, in async_execute
     await self.async_execute_cell(
-  File "/usr/share/miniconda3/envs/xbatcher-ML-1-cookbook-dev/lib/python3.10/site-packages/nbclient/client.py", line 965, in async_execute_cell
+  File "/home/runner/miniconda3/envs/xbatcher-ML-1-cookbook-dev/lib/python3.10/site-packages/nbclient/client.py", line 965, in async_execute_cell
     await self._check_raise_for_error(cell, cell_index, exec_reply)
-  File "/usr/share/miniconda3/envs/xbatcher-ML-1-cookbook-dev/lib/python3.10/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+  File "/home/runner/miniconda3/envs/xbatcher-ML-1-cookbook-dev/lib/python3.10/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-%run ./surface_currents_prep.ipynb
+prepare_data(sc5, 200, 1000, 1000, 200)
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mOSError[0m                                   Traceback (most recent call last)
-File [0;32m/usr/share/miniconda3/envs/xbatcher-ML-1-cookbook-dev/lib/python3.10/site-packages/IPython/core/magics/execution.py:698[0m, in [0;36mExecutionMagics.run[0;34m(self, parameter_s, runner, file_finder)[0m
-[1;32m    697[0m     fpath [38;5;241m=[39m arg_lst[[38;5;241m0[39m]
-[0;32m--> 698[0m     filename [38;5;241m=[39m [43mfile_finder[49m[43m([49m[43mfpath[49m[43m)[49m
-[1;32m    699[0m [38;5;28;01mexcept[39;00m [38;5;167;01mIndexError[39;00m [38;5;28;01mas[39;00m e:
+[0;31mTypeError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[9], line 1[0m
+[0;32m----> 1[0m [43mprepare_data[49m[43m([49m[43msc5[49m[43m,[49m[43m [49m[38;5;241;43m200[39;49m[43m,[49m[43m [49m[38;5;241;43m1000[39;49m[43m,[49m[43m [49m[38;5;241;43m1000[39;49m[43m,[49m[43m [49m[38;5;241;43m200[39;49m[43m)[49m
 
-File [0;32m/usr/share/miniconda3/envs/xbatcher-ML-1-cookbook-dev/lib/python3.10/site-packages/IPython/utils/path.py:90[0m, in [0;36mget_py_filename[0;34m(name)[0m
-[1;32m     89[0m         [38;5;28;01mreturn[39;00m py_name
-[0;32m---> 90[0m [38;5;28;01mraise[39;00m [38;5;167;01mIOError[39;00m([38;5;124m"[39m[38;5;124mFile `[39m[38;5;132;01m%r[39;00m[38;5;124m` not found.[39m[38;5;124m"[39m [38;5;241m%[39m name)
+File [0;32m/tmp/ipykernel_3297/3337232756.py:3[0m, in [0;36mprepare_data[0;34m(sc, training_time, test_time, predict_time, mask_time)[0m
+[1;32m      1[0m [38;5;28;01mdef[39;00m [38;5;21mprepare_data[39m(sc, training_time, test_time, predict_time, mask_time[38;5;241m=[39m[38;5;241m11[39m):
+[1;32m      2[0m     cat [38;5;241m=[39m open_catalog([38;5;124m"[39m[38;5;124mhttps://raw.githubusercontent.com/pangeo-data/pangeo-datastore/master/intake-catalogs/ocean/CESM_POP.yaml[39m[38;5;124m"[39m)
+[0;32m----> 3[0m     ds  [38;5;241m=[39m [43mcat[49m[43m[[49m[38;5;124;43m"[39;49m[38;5;124;43mCESM_POP_hires_control[39;49m[38;5;124;43m"[39;49m[43m][49m[38;5;241m.[39mto_dask()
+[1;32m      4[0m     ds [38;5;241m=[39m ds[38;5;241m.[39mrename({[38;5;124m'[39m[38;5;124mU1_1[39m[38;5;124m'[39m:[38;5;124m'[39m[38;5;124mU[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mV1_1[39m[38;5;124m'[39m:[38;5;124m'[39m[38;5;124mV[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mTAUX_2[39m[38;5;124m'[39m:[38;5;124m'[39m[38;5;124mTAUX[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mTAUY_2[39m[38;5;124m'[39m:[38;5;124m'[39m[38;5;124mTAUY[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mSSH_2[39m[38;5;124m'[39m:[38;5;124m'[39m[38;5;124mSSH[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mULONG[39m[38;5;124m'[39m:[38;5;124m'[39m[38;5;124mXU[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mULAT[39m[38;5;124m'[39m:[38;5;124m'[39m[38;5;124mYU[39m[38;5;124m'[39m})
+[1;32m      5[0m     ds [38;5;241m=[39m add_grid(ds)
 
-[0;31mOSError[0m: File `'./surface_currents_prep.ipynb'` not found.
+File [0;32m~/miniconda3/envs/xbatcher-ML-1-cookbook-dev/lib/python3.10/site-packages/intake/catalog/base.py:472[0m, in [0;36mCatalog.__getitem__[0;34m(self, key)[0m
+[1;32m    463[0m [38;5;250m[39m[38;5;124;03m"""Return a catalog entry by name.[39;00m
+[1;32m    464[0m 
+[1;32m    465[0m [38;5;124;03mCan also use attribute syntax, like ``cat.entry_name``, or[39;00m
+[0;32m   (...)[0m
+[1;32m    468[0m [38;5;124;03mcat['name1', 'name2'][39;00m
+[1;32m    469[0m [38;5;124;03m"""[39;00m
+[1;32m    470[0m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m [38;5;28misinstance[39m(key, [38;5;28mlist[39m) [38;5;129;01mand[39;00m key [38;5;129;01min[39;00m [38;5;28mself[39m:
+[1;32m    471[0m     [38;5;66;03m# triggers reload_on_change[39;00m
+[0;32m--> 472[0m     s [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_get_entry[49m[43m([49m[43mkey[49m[43m)[49m
+[1;32m    473[0m     [38;5;28;01mif[39;00m s[38;5;241m.[39mcontainer [38;5;241m==[39m [38;5;124m"[39m[38;5;124mcatalog[39m[38;5;124m"[39m:
+[1;32m    474[0m         s[38;5;241m.[39mname [38;5;241m=[39m key
 
-The above exception was the direct cause of the following exception:
+File [0;32m~/miniconda3/envs/xbatcher-ML-1-cookbook-dev/lib/python3.10/site-packages/intake/catalog/utils.py:43[0m, in [0;36mreload_on_change.<locals>.wrapper[0;34m(self, *args, **kwargs)[0m
+[1;32m     40[0m [38;5;129m@functools[39m[38;5;241m.[39mwraps(f)
+[1;32m     41[0m [38;5;28;01mdef[39;00m [38;5;21mwrapper[39m([38;5;28mself[39m, [38;5;241m*[39margs, [38;5;241m*[39m[38;5;241m*[39mkwargs):
+[1;32m     42[0m     [38;5;28mself[39m[38;5;241m.[39mreload()
+[0;32m---> 43[0m     [38;5;28;01mreturn[39;00m [43mf[49m[43m([49m[38;5;28;43mself[39;49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[43margs[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
 
-[0;31mException[0m                                 Traceback (most recent call last)
-Cell [0;32mIn[8], line 1[0m
-[0;32m----> 1[0m [43mget_ipython[49m[43m([49m[43m)[49m[38;5;241;43m.[39;49m[43mrun_line_magic[49m[43m([49m[38;5;124;43m'[39;49m[38;5;124;43mrun[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[38;5;124;43m'[39;49m[38;5;124;43m./surface_currents_prep.ipynb[39;49m[38;5;124;43m'[39;49m[43m)[49m
+File [0;32m~/miniconda3/envs/xbatcher-ML-1-cookbook-dev/lib/python3.10/site-packages/intake/catalog/base.py:355[0m, in [0;36mCatalog._get_entry[0;34m(self, name)[0m
+[1;32m    353[0m ups [38;5;241m=[39m [up [38;5;28;01mfor[39;00m name, up [38;5;129;01min[39;00m [38;5;28mself[39m[38;5;241m.[39muser_parameters[38;5;241m.[39mitems() [38;5;28;01mif[39;00m name [38;5;129;01mnot[39;00m [38;5;129;01min[39;00m up_names]
+[1;32m    354[0m entry[38;5;241m.[39m_user_parameters [38;5;241m=[39m ups [38;5;241m+[39m (entry[38;5;241m.[39m_user_parameters [38;5;129;01mor[39;00m [])
+[0;32m--> 355[0m [38;5;28;01mreturn[39;00m [43mentry[49m[43m([49m[43m)[49m
 
-File [0;32m/usr/share/miniconda3/envs/xbatcher-ML-1-cookbook-dev/lib/python3.10/site-packages/IPython/core/interactiveshell.py:2369[0m, in [0;36mInteractiveShell.run_line_magic[0;34m(self, magic_name, line, _stack_depth)[0m
-[1;32m   2367[0m     kwargs[[38;5;124m'[39m[38;5;124mlocal_ns[39m[38;5;124m'[39m] [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39mget_local_scope(stack_depth)
-[1;32m   2368[0m [38;5;28;01mwith[39;00m [38;5;28mself[39m[38;5;241m.[39mbuiltin_trap:
-[0;32m-> 2369[0m     result [38;5;241m=[39m [43mfn[49m[43m([49m[38;5;241;43m*[39;49m[43margs[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
-[1;32m   2371[0m [38;5;66;03m# The code below prevents the output from being displayed[39;00m
-[1;32m   2372[0m [38;5;66;03m# when using magics with decodator @output_can_be_silenced[39;00m
-[1;32m   2373[0m [38;5;66;03m# when the last Python token in the expression is a ';'.[39;00m
-[1;32m   2374[0m [38;5;28;01mif[39;00m [38;5;28mgetattr[39m(fn, magic[38;5;241m.[39mMAGIC_OUTPUT_CAN_BE_SILENCED, [38;5;28;01mFalse[39;00m):
+File [0;32m~/miniconda3/envs/xbatcher-ML-1-cookbook-dev/lib/python3.10/site-packages/intake/catalog/entry.py:60[0m, in [0;36mCatalogEntry.__call__[0;34m(self, persist, **kwargs)[0m
+[1;32m     58[0m [38;5;28;01mdef[39;00m [38;5;21m__call__[39m([38;5;28mself[39m, persist[38;5;241m=[39m[38;5;28;01mNone[39;00m, [38;5;241m*[39m[38;5;241m*[39mkwargs):
+[1;32m     59[0m [38;5;250m    [39m[38;5;124;03m"""Instantiate DataSource with given user arguments"""[39;00m
+[0;32m---> 60[0m     s [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mget[49m[43m([49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
+[1;32m     61[0m     s[38;5;241m.[39m_entry [38;5;241m=[39m [38;5;28mself[39m
+[1;32m     62[0m     s[38;5;241m.[39m_passed_kwargs [38;5;241m=[39m [38;5;28mlist[39m(kwargs)
 
-File [0;32m/usr/share/miniconda3/envs/xbatcher-ML-1-cookbook-dev/lib/python3.10/site-packages/IPython/core/magics/execution.py:709[0m, in [0;36mExecutionMagics.run[0;34m(self, parameter_s, runner, file_finder)[0m
-[1;32m    707[0m     [38;5;28;01mif[39;00m os[38;5;241m.[39mname [38;5;241m==[39m [38;5;124m'[39m[38;5;124mnt[39m[38;5;124m'[39m [38;5;129;01mand[39;00m re[38;5;241m.[39mmatch([38;5;124mr[39m[38;5;124m"[39m[38;5;124m^[39m[38;5;124m'[39m[38;5;124m.*[39m[38;5;124m'[39m[38;5;124m$[39m[38;5;124m"[39m,fpath):
-[1;32m    708[0m         warn([38;5;124m'[39m[38;5;124mFor Windows, use double quotes to wrap a filename: [39m[38;5;132;01m%r[39;00m[38;5;124mun [39m[38;5;124m"[39m[38;5;124mmypath[39m[38;5;130;01m\\[39;00m[38;5;124mmyfile.py[39m[38;5;124m"[39m[38;5;124m'[39m)
-[0;32m--> 709[0m     [38;5;28;01mraise[39;00m [38;5;167;01mException[39;00m(msg) [38;5;28;01mfrom[39;00m [38;5;21;01me[39;00m
-[1;32m    710[0m [38;5;28;01mexcept[39;00m [38;5;167;01mTypeError[39;00m:
-[1;32m    711[0m     [38;5;28;01mif[39;00m fpath [38;5;129;01min[39;00m sys[38;5;241m.[39mmeta_path:
+File [0;32m~/miniconda3/envs/xbatcher-ML-1-cookbook-dev/lib/python3.10/site-packages/intake/catalog/local.py:313[0m, in [0;36mLocalCatalogEntry.get[0;34m(self, **user_parameters)[0m
+[1;32m    310[0m     [38;5;28;01mreturn[39;00m [38;5;28mself[39m[38;5;241m.[39m_default_source
+[1;32m    312[0m plugin, open_args [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39m_create_open_args(user_parameters)
+[0;32m--> 313[0m data_source [38;5;241m=[39m [43mplugin[49m[43m([49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mopen_args[49m[43m)[49m
+[1;32m    314[0m data_source[38;5;241m.[39mcatalog_object [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39m_catalog
+[1;32m    315[0m data_source[38;5;241m.[39mname [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39mname
 
-[0;31mException[0m: File `'./surface_currents_prep.ipynb'` not found.
-Exception: File `'./surface_currents_prep.ipynb'` not found.
+[0;31mTypeError[0m: ZarrArraySource.__init__() got an unexpected keyword argument 'consolidated'
+TypeError: ZarrArraySource.__init__() got an unexpected keyword argument 'consolidated'
 
