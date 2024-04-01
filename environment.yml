@@ -27,6 +27,4 @@ dependencies:
   - pydata-sphinx-theme<=0.8
   - jsonschema-with-format-nongpl<4.19.1
   - docutils==0.16
-  - pip
-  - pip:
-      - sphinx-pythia-theme
+  - sphinx-pythia-theme
