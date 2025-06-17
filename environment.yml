@@ -24,3 +24,4 @@ dependencies:
   - jsonschema-with-format-nongpl
   - docutils
   - sphinx-pythia-theme
+  - mystmd
