@@ -1,11 +1,11 @@
 version: 1
 extends:
-  - https://raw.githubusercontent.com/projectpythia-mystmd/pythia-config/main/pythia.yml
+  - https://raw.githubusercontent.com/projectpythia/pythia-config/main/pythia.yml
 project:
   title: xbatcher for Machine Learning Part 1
   authors:
     - name: Christopher Dupuis
-  github: https://github.com/projectpythia-mystmd/xbatcher-ML-1-cookbook
+  github: https://github.com/projectpythia/xbatcher-ML-1-cookbook
   copyright: '2024'
   toc:
     - file: README.md
@@ -19,7 +19,7 @@ project:
         - file: notebooks/surface_currents_model.ipynb
   jupyter:
       binder:
-        repo: projectpythia-mystmd/xbatcher-ML-1-cookbook
+        repo: projectpythia/xbatcher-ML-1-cookbook
 site:
   options:
     logo: notebooks/images/logos/pythia_logo-white-rtext.svg
