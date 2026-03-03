@@ -14,7 +14,7 @@ By the end of this tutorial, you should be able to use core features of `xbatche
 
 ## Authors
 
-[Christopher Dupuis](@cmdupuis3), [Anirban Sinha](@anirban89), [Ryan Abernathey](@rabernat)
+[Christopher Dupuis](https://github.com/cmdupuis3), [Anirban Sinha](https://github.com/anirban89), [Ryan Abernathey](https://github.com/rabernat)
 
 ### Contributors
 
